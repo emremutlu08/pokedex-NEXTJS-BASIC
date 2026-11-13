@@ -1,7 +1,8 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import Image from 'next/image';
+import NextImage from 'next/image';
+const Image = props => <NextImage loader={({ src }) => src} unoptimized {...props} />;
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Chip from '@mui/material/Chip';

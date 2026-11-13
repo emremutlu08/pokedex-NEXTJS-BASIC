@@ -14,8 +14,16 @@ import BasicInfoCard from './../../src/Components/Content/Cards/BasicInfoCard';
 import EvolveCard from './../../src/Components/Content/Cards/EvolveCard';
 import StatsCard from './../../src/Components/Content/Cards/StatsCard';
 
-// Runs server side
-export async function getServerSideProps(context) {
+// Every Pokémon page is generated at build time so the site can be served as static files.
+const POKEMON_COUNT = 898;
+export async function getStaticPaths() {
+  return {
+    paths: Array.from({ length: POKEMON_COUNT }, (_, index) => ({ params: { pokemon: String(index + 1) } })),
+    fallback: false,
+  };
+}
+
+export async function getStaticProps(context) {
   const { pokemon } = context.params;
   if (pokemon > 898)
     return {
